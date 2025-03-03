@@ -1,17 +1,19 @@
 pipeline {
     agent any
-
     stages {
-        stage('Build') {
+        stage('Checkout Code') {
             steps {
-                echo 'Building the project with Maven...'
-                sh 'mvn -B package'
+                git 'https://github.com/baralaa/AanchalBaral.git'
             }
         }
-        stage('Test') {
+        stage('Build') {
             steps {
-                echo 'Running tests...'
-                sh 'mvn test'
+                sh 'javac src/Main.java'
+            }
+        }
+        stage('Run') {
+            steps {
+                sh 'java src.Main'
             }
         }
     }
